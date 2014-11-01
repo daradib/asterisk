@@ -17,6 +17,9 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 DPKG_EXPORT_BUILDFLAGS = 1
 include /usr/share/dpkg/buildflags.mk
 
+# Sanity check for a stable release:
+SAVED_ABI_HASH = 8244290e5e83dd4667d88bdeb8ddf189
+
 export DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 export DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 
@@ -96,6 +99,15 @@ override_dh_auto_build:
 		menuselect/menuselect --enable DEBUG_THREADS menuselect.makeopts ; \
 	fi
 	$(FETCH_ENV) dh_auto_build -- $(BUILDFLAGS)
+	# Sanity check: don't break the ABI for modules:
+	@abi_hash=`awk -F'"' '/AST_BUILDOPT_SUM/ {print $$2}' include/asterisk/buildopts.h`; \
+	  if [ "$$abi_hash" != "$(SAVED_ABI_HASH)" ]; then \
+	    echo "Debian packaging problem: ABI checksum changed."; \
+	    echo "  Was: $(SAVED_ABI_HASH)"; \
+	    echo "  Now: $$abi_hash"; \
+	    echo "Check include/asterisk/buildopts.h"; \
+	    exit 1; \
+	  fi
 
 SND_FILE=asterisk-core-sounds-en-gsm-1.4.20.tar.gz
 override_dh_clean:
