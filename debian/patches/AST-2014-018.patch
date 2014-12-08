@@ -1,0 +1,41 @@
+From 97a7e59635cc71f82e932d9f142ac58ffbfee431 Mon Sep 17 00:00:00 2001
+From: Kevin Harwell <kharwell@digium.com>
+Date: Thu, 20 Nov 2014 16:22:50 +0000
+Subject: [PATCH 3/3] AST-2014-018 - func_db: DB Dialplan function permission
+ escalation via AMI.
+
+The DB dialplan function when executed from an external protocol (for instance
+AMI), could result in a privilege escalation.
+
+Asterisk now inhibits the DB function from being executed from an external
+interface if the live_dangerously option is set to no.
+
+ASTERISK-24534
+Reported by: Gareth Palmer
+patches: submitted by Gareth Palmer (license 5169)
+........
+
+Merged revisions 428331 from http://svn.asterisk.org/svn/asterisk/branches/1.8
+
+
+git-svn-id: http://svn.asterisk.org/svn/asterisk/branches/11@428363 f38db490-d61c-443f-a65b-d21fe96a405b
+---
+ funcs/func_db.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/funcs/func_db.c b/funcs/func_db.c
+index ebe58f0..b56fef9 100644
+--- a/funcs/func_db.c
++++ b/funcs/func_db.c
+@@ -351,7 +351,7 @@ static int load_module(void)
+ {
+ 	int res = 0;
+ 
+-	res |= ast_custom_function_register(&db_function);
++	res |= ast_custom_function_register_escalating(&db_function, AST_CFE_BOTH);
+ 	res |= ast_custom_function_register(&db_exists_function);
+ 	res |= ast_custom_function_register_escalating(&db_delete_function, AST_CFE_READ);
+ 	res |= ast_custom_function_register(&db_keys_function);
+-- 
+2.1.3
+
