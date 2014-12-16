@@ -3,6 +3,8 @@ asterisk (1:11.13.1~dfsg-2) unstable; urgency=medium
   * New upstream release: fixes AST-2014-011 (CVE-2014-3566, POODLE).
   * Add a local gbp.conf for branch jessie
   * New patches for recent security issues (Closes: #771463):
+    - AST-2014-012: Mixed IP address families in ACLs may permit unwanted
+      traffic
     - AST-2014-014: High call load may result in hung channels in ConfBridge
     - AST-2014-017: Mark CONFBRIDGE as a sensitive function for external APIs
     - AST-2014-018: Mark DB as a sensitive function for external APIs

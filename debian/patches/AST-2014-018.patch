@@ -1,24 +1,23 @@
 From 97a7e59635cc71f82e932d9f142ac58ffbfee431 Mon Sep 17 00:00:00 2001
 From: Kevin Harwell <kharwell@digium.com>
 Date: Thu, 20 Nov 2014 16:22:50 +0000
-Subject: [PATCH 3/3] AST-2014-018 - func_db: DB Dialplan function permission
- escalation via AMI.
+Subject: AMI permission escalation through DB dialplan function
+CVE: CVE-2014-8418
+Origin: http://svnview.digium.com/svn/asterisk?view=rev&rev=428363
+Bug: https://issues.asterisk.org/jira/browse/ASTERISK-24534
 
-The DB dialplan function when executed from an external protocol (for instance
-AMI), could result in a privilege escalation.
+The DB dialplan function when executed from an external protocol (for
+instance AMI - the Asterisk Manager Interface), could result in a
+privilege escalation.
 
 Asterisk now inhibits the DB function from being executed from an external
 interface if the live_dangerously option is set to no.
 
-ASTERISK-24534
-Reported by: Gareth Palmer
-patches: submitted by Gareth Palmer (license 5169)
-........
+In the default configuration the manager interface is only accessible
+from localhost with no users configured and no AGI script is installed,
+however using such interfaces is very common.
 
-Merged revisions 428331 from http://svn.asterisk.org/svn/asterisk/branches/1.8
-
-
-git-svn-id: http://svn.asterisk.org/svn/asterisk/branches/11@428363 f38db490-d61c-443f-a65b-d21fe96a405b
+See Also: http://downloads.asterisk.org/pub/security/AST-2014-018.html
 ---
  funcs/func_db.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

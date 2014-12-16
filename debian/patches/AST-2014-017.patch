@@ -1,17 +1,15 @@
 From 192e4a1d7a04077fe3e94d6eff3ebbd187aa8c05 Mon Sep 17 00:00:00 2001
 From: Kevin Harwell <kharwell@digium.com>
 Date: Thu, 20 Nov 2014 15:42:01 +0000
-Subject: [PATCH 2/3] AST-2014-017 - app_confbridge: permission escalation/
- class authorization.
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Subject: Permission escalation through ConfBridge actions/dialplan functions
+CVE: CVE-2014-8417
+Origin: http://svnview.digium.com/svn/asterisk?view=rev&rev=428332
+Bug: https://issues.asterisk.org/jira/browse/ASTERISK-24490
 
-Confbridge dialplan function permission escalation via AMI and inappropriate
-class authorization on the ConfbridgeStartRecord action. The CONFBRIDGE dialplan
-function when executed from an external protocol (for instance AMI), could
-result in a privilege escalation. Also, the AMI action “ConfbridgeStartRecord”
-could also be used to execute arbitrary system commands without first checking
+The CONFBRIDGE dialplan function when executed from an external protocol
+(for instance AMI - the Asterisk Manager Interface), could result in a
+privilege escalation. Also, the AMI action “ConfbridgeStartRecord” could
+also be used to execute arbitrary system commands without first checking
 for system access.
 
 Asterisk now inhibits the CONFBRIDGE function from being executed from an
@@ -19,11 +17,12 @@ external interface if the live_dangerously option is set to no.  Also, the
 “ConfbridgeStartRecord” AMI action is now only allowed to execute under a
 user with system level access.
 
-ASTERISK-24490
-Reported by: Gareth Palmer
+In the default configuration the manager interface is only accessible
+from localhost with no users configured and no AGI script is installed,
+however using such interfaces is very common.
 
 
-git-svn-id: http://svn.asterisk.org/svn/asterisk/branches/11@428332 f38db490-d61c-443f-a65b-d21fe96a405b
+See Also: http://downloads.asterisk.org/pub/security/AST-2014-017.html
 ---
  apps/app_confbridge.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
