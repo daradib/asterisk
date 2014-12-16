@@ -8,6 +8,8 @@ asterisk (1:11.13.1~dfsg-2) unstable; urgency=medium
     - AST-2014-014: High call load may result in hung channels in ConfBridge
     - AST-2014-017: Mark CONFBRIDGE as a sensitive function for external APIs
     - AST-2014-018: Mark DB as a sensitive function for external APIs
+  * AST-2014-019.patch (CVE-2014-9374): Remote Crash Vulnerability in
+    WebSocket Server (Closes: #773230).
   * sanity check to avoid changing the ABI hash
 
  -- Tzafrir Cohen <tzafrir@debian.org>  Wed, 10 Dec 2014 06:44:45 +0200
