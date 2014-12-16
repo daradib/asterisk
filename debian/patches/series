@@ -34,6 +34,7 @@ aelparse_enable.patch
 res_fax_bounds.patch
 neon_version_check.patch
 
+AST-2014-012.patch
 AST-2014-014.patch
 AST-2014-017.patch
 AST-2014-018.patch
