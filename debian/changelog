@@ -1,4 +1,4 @@
-asterisk (1:11.13.1~dfsg-2) unstable; urgency=medium
+asterisk (1:11.13.1~dfsg-2) testing-proposed-updates; urgency=high
 
   * New upstream release: fixes AST-2014-011 (CVE-2014-3566, POODLE).
   * Add a local gbp.conf for branch jessie
@@ -13,9 +13,9 @@ asterisk (1:11.13.1~dfsg-2) unstable; urgency=medium
       external APIs
   * AST-2014-019.patch (CVE-2014-9374): Remote Crash Vulnerability in
     WebSocket Server (Closes: #773230).
-  * sanity check to avoid changing the ABI hash
+  * sanity check to avoid changing the ABI hash.
 
- -- Tzafrir Cohen <tzafrir@debian.org>  Wed, 10 Dec 2014 06:44:45 +0200
+ -- Tzafrir Cohen <tzafrir@debian.org>  Thu, 01 Jan 2015 01:25:11 +0200
 
 asterisk (1:11.13.0~dfsg-1) unstable; urgency=medium
 
