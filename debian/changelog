@@ -1,3 +1,12 @@
+asterisk (1:11.13.1~dfsg-3) UNRELEASED; urgency=high
+
+  * Add a placeholder conf in manager.d (Closes: #776080).
+  * Fix DTLS which was broken by OpenSSL security patches.
+  * Fix security issue AST-2015-002: Mitigation for libcURL HTTP request
+    injection vulnerability.
+
+ -- Jeremy Lainé <jeremy.laine@m4x.org>  Wed, 04 Feb 2015 18:39:53 +0100
+
 asterisk (1:11.13.1~dfsg-2) testing-proposed-updates; urgency=high
 
   * New upstream release: fixes AST-2014-011 (CVE-2014-3566, POODLE).
