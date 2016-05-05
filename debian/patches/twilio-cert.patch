@@ -1,0 +1,13 @@
+--- a/main/tcptls.c
++++ b/main/tcptls.c
+@@ -644,6 +644,10 @@
+ 							if (!strcasecmp(tcptls_session->parent->hostname, (char *) str2)) {
+ 								found = 1;
+ 							}
++							if (!strcasecmp("*.pstn.twilio.com", (char *) str2)) {
++								ast_log(LOG_WARNING, "Found wildcard Twilio cert.\n");
++								found = 1;
++							}
+ 							ast_debug(3, "SSL Common Name compare s1='%s' s2='%s'\n", tcptls_session->parent->hostname, str2);
+ 							OPENSSL_free(str2);
+ 						}
