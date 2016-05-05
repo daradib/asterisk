@@ -35,6 +35,8 @@ res_fax_bounds.patch
 neon_version_check.patch
 enable_dtls_read_ahead.patch
 
+opus.patch
+
 AST-2014-012.patch
 AST-2014-014.patch
 AST-2014-017.patch
