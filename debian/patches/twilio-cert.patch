@@ -1,13 +1,39 @@
---- a/main/tcptls.c
-+++ b/main/tcptls.c
-@@ -644,6 +644,10 @@
- 							if (!strcasecmp(tcptls_session->parent->hostname, (char *) str2)) {
+Description: Patch Asterisk to allow verifying Twilio's secure SIP trunking
+Origin: https://gist.github.com/madsen/51d6160a906187b026d0
+Author: Christopher J. Madsen <cjm@cjmweb.net>
+Forwarded: no
+Last-Update: 2016-08-25
+
+--- asterisk.orig/main/tcptls.c
++++ asterisk/main/tcptls.c
+@@ -550,6 +550,12 @@ static void session_instance_destructor(
+ 	ast_free(i->overflow_buf);
+ }
+ 
++static int is_twilio_hostname(const char* host)
++{
++  const size_t len = strlen(host);
++  return ((len > 11) && !strcasecmp(host + (len - 11), ".twilio.com"));
++}
++
+ /*! \brief
+ * creates a FILE * from the fd passed by the accept thread.
+ * This operation is potentially expensive (certificate verification),
+@@ -630,6 +636,7 @@ static void *handle_tcptls_connection(vo
+ 					X509_NAME *name = X509_get_subject_name(peer);
+ 					int pos = -1;
+ 					int found = 0;
++					const int twilio_hack = is_twilio_hostname(tcptls_session->parent->hostname);
+ 
+ 					for (;;) {
+ 						/* Walk the certificate to check all available "Common Name" */
+@@ -647,7 +654,8 @@ static void *handle_tcptls_connection(vo
+ 						if (str2) {
+ 							if (strlen((char *) str2) != ret) {
+ 								ast_log(LOG_WARNING, "Invalid certificate common name length (contains NULL bytes?)\n");
+-							} else if (!strcasecmp(tcptls_session->parent->hostname, (char *) str2)) {
++							} else if (!strcasecmp(tcptls_session->parent->hostname, (char *) str2) ||
++								   (twilio_hack && is_twilio_hostname((char *) str2))) {
  								found = 1;
  							}
-+							if (!strcasecmp("*.pstn.twilio.com", (char *) str2)) {
-+								ast_log(LOG_WARNING, "Found wildcard Twilio cert.\n");
-+								found = 1;
-+							}
  							ast_debug(3, "SSL Common Name compare s1='%s' s2='%s'\n", tcptls_session->parent->hostname, str2);
- 							OPENSSL_free(str2);
- 						}

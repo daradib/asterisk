@@ -35,9 +35,6 @@ res_fax_bounds.patch
 neon_version_check.patch
 enable_dtls_read_ahead.patch
 
-opus.patch
-twilio-cert.patch
-
 AST-2014-012.patch
 AST-2014-014.patch
 AST-2014-017.patch
@@ -45,3 +42,6 @@ AST-2014-018.patch
 AST-2014-019.patch
 AST-2015-002.patch
 AST-2015-003.patch
+
+opus.patch
+twilio-cert.patch

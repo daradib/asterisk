@@ -1,5 +1,7 @@
---- a/main/tcptls.c
-+++ b/main/tcptls.c
+Index: main/tcptls.c
+===================================================================
+--- a/main/tcptls.c	(revision 433025)
++++ b/main/tcptls.c	(working copy)
 @@ -639,9 +639,15 @@
  							break;
  						}
@@ -17,4 +19,4 @@
 +							} else if (!strcasecmp(tcptls_session->parent->hostname, (char *) str2)) {
  								found = 1;
  							}
- 							if (!strcasecmp("*.pstn.twilio.com", (char *) str2)) {
+ 							ast_debug(3, "SSL Common Name compare s1='%s' s2='%s'\n", tcptls_session->parent->hostname, str2);
