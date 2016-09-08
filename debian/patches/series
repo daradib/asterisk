@@ -45,6 +45,7 @@ AST-2015-003.patch
 AST-2016-001.patch
 AST-2016-002.patch
 AST-2016-003.patch
+AST-2016-007.patch
 
 opus.patch
 twilio-cert.patch
