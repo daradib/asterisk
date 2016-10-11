@@ -33,7 +33,6 @@ escape_manpage_hyphen.patch
 aelparse_enable.patch
 res_fax_bounds.patch
 neon_version_check.patch
-enable_dtls_read_ahead.patch
 
 AST-2014-012.patch
 AST-2014-014.patch
