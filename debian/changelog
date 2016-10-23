@@ -1,3 +1,18 @@
+asterisk (1:11.13.1~dfsg-2+deb8u1) jessie-security; urgency=high
+
+  [ Tzafrir Cohen ]
+  * Add a placeholder conf in manager.c (Closes: #776080)
+
+  [ Bernhard Schmidt ]
+  * AST-2016-007: Fix RTP Resource Exhaustion (CVE-2016-7551) (Closes: #838832)
+  * AST-2015-003: Fix TLS Certificate Common name NULL byte exploit (CVE-2015-3008)
+    (Closes: #782411)
+  * AST-2016-003: Fix crash in UDPTL (CVE-2016-2232)
+  * AST-2016-002: File descriptor exhaustion in chan_sip (CVE-2016-2316)
+  * AST-2016-001: BEAST vulnerability in HTTP server (CVE-2011-3389)
+
+ -- Bernhard Schmidt <berni@debian.org>  Sun, 23 Oct 2016 21:28:38 +0200
+
 asterisk (1:11.13.1~dfsg-2) testing-proposed-updates; urgency=high
 
   * New upstream release: fixes AST-2014-011 (CVE-2014-3566, POODLE).
