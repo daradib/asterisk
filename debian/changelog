@@ -1,8 +1,15 @@
-asterisk (1:11.13.1~dfsg-2+deb8u1+dara1) UNRELEASED; urgency=medium
+asterisk (1:11.13.1~dfsg-2+deb8u2dara1) UNRELEASED; urgency=medium
 
   * Patched to support Opus transcoding and Twilio certificate verification.
 
- -- Dara Adib <daradib@applemon.com>  Mon, 16 May 2016 06:58:59 -0400
+ -- Dara Adib <daradib@applemon.com>  Mon, 16 Jan 2017 13:14:31 -0500
+
+asterisk (1:11.13.1~dfsg-2+deb8u2) jessie; urgency=medium
+
+  * AST-2016-009: non-printable ASCII chars treated as whitespace (CVE-2016-9938)
+    (Closes: #847668)
+
+ -- Bernhard Schmidt <berni@debian.org>  Tue, 03 Jan 2017 23:54:39 +0100
 
 asterisk (1:11.13.1~dfsg-2+deb8u1) jessie-security; urgency=high
 
