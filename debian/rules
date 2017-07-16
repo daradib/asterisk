@@ -42,6 +42,9 @@ BUILDFLAGS += NOISY_BUILD=yes
 
 BUILDFLAGS += ASTDATADIR=/usr/share/asterisk ASTVARRUNDIR=/var/run/asterisk
 
+# Support older glibc headers.
+CFLAGS += -fgnu89-inline
+
 ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
 	ENABLE_DEBUG += --enable-dev-mode
 endif
@@ -86,7 +89,6 @@ override_dh_auto_configure:
 		--infodir=\$${prefix}/share/info	\
 		--disable-asteriskssl			\
 		--with-gsm				\
-		--with-imap=system			\
 		--without-pwlib				\
 		${ENABLE_DEBUG}
 
@@ -127,7 +129,7 @@ override_dh_gencontrol:
 		dh_gencontrol -- -Vasterisk:ABI=$$AST_BUILDOPT_SUM
 
 SUBPACKS_EXTRA = \
-		 voicemail voicemail-odbcstorage voicemail-imapstorage \
+		 voicemail voicemail-odbcstorage \
 		 ooh323 mysql mp3
 ifeq (linux,$(BUILD_OS))
 SUBPACKS_EXTRA += dahdi mobile vpb
@@ -151,9 +153,7 @@ override_dh_install:
 		    ; cd $(CURDIR)/debian/asterisk-modules/usr/lib/asterisk/modules \
 		    && rm -f $$extra_packs
 
-	# Rename dh_install file for -imapstorage and -odbcstorage.
-	mv $(CURDIR)/debian/asterisk-voicemail-imapstorage/usr/lib/asterisk/modules/app_voicemail_imapstorage.so \
-		$(CURDIR)/debian/asterisk-voicemail-imapstorage/usr/lib/asterisk/modules/app_voicemail.so
+	# Rename dh_install file for -odbcstorage.
 	mv $(CURDIR)/debian/asterisk-voicemail-odbcstorage/usr/lib/asterisk/modules/app_voicemail_odbcstorage.so \
 		$(CURDIR)/debian/asterisk-voicemail-odbcstorage/usr/lib/asterisk/modules/app_voicemail.so
 
